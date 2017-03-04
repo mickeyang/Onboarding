@@ -1,0 +1,73 @@
+﻿@model List<Onboarding.Models.Fruit>
+
+@{
+    ViewBag.Title = "MickeyFruit";
+}
+
+<div class="jumbotron">
+    <h1>Welcome to Mickey Fruit</h1>
+    @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>*@
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td data-bind="value:id">
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td data-bind="value:name">
+                @Html.DisplayFor(modelItem => item.Name).ToString().ToUpper()
+            </td>
+            <td data-bind="value:description">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td ata-bind="value:price">
+                $@Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    //$(document).ready(function () {
+    //    $.ajax({
+    //        url: "ListFruit",
+    //        type: "GET",
+    //        datatype: "JSON",
+    //        success: function (result) {
+    //            console.log(result);
+    //            $.each(result, function (i, fruit) {
+    //                var row = "<tr><td>" + fruit.id + "</td><td>" + fruit.name
+    //                        + "</td><td>" + fruit.description + "</td><td>" + fruit.price
+    //                        + "</td><td>" + fruit.image + "</td></tr>";
+    //                $("#data").append(row);
+    //            })
+    //        }
+    //    });
+    //});
+</script>

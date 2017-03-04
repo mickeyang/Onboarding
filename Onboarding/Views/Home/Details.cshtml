@@ -1,0 +1,35 @@
+﻿@model Onboarding.Models.Fruit
+@{
+    ViewBag.Title = "FruitDetail";
+}
+
+<h2 data-bind="id">@Html.DisplayFor(m => m.Id)</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd></dd>
+            <dt>Description</dt>
+            <dd></dd>
+            <dt>Price</dt>
+            <dd></dd>
+            <dt>Image</dt>
+            <dd></dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    <script>
+        function ViewModel() {
+            var self = this;
+
+            //create a JS fruit object
+
+
+
+        }
+    </script>
