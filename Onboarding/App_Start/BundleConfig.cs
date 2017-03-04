@@ -10,6 +10,9 @@ namespace Onboarding
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/fruit.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                         "~/Scripts/knockout-3.4.1.js",
                         "~/Scripts/knockout.mapping-latest.js"));
 

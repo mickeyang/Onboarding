@@ -28,3 +28,12 @@ textarea {
     color:#ffffff;
     font-size:50%;
 }
+
+h2{
+    text-transform:uppercase;
+}
+
+dt,dd{
+    padding-top:5px;
+    padding-bottom:5px;
+}

@@ -2,34 +2,46 @@
 @{
     ViewBag.Title = "FruitDetail";
 }
+<h2 data-bind="text:name"></h2>
 
-<h2 data-bind="id">@Html.DisplayFor(m => m.Id)</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Code</dt>
+        <dd id="fruitId">@Html.DisplayFor(m => m.Id)</dd>
+        <dt>Description</dt>
+        <dd data-bind="text:description"></dd>
+        <dt>Price</dt>
+        <dd data-bind="text:price"></dd>
+        <dt>Image</dt>
+        <dd data-bind="text:image"></dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
 
-    <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Name</dt>
-            <dd></dd>
-            <dt>Description</dt>
-            <dd></dd>
-            <dt>Price</dt>
-            <dd></dd>
-            <dt>Image</dt>
-            <dd></dd>
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<script>
+    $("#fruitId").ready(function () {
+        var fruitId = $("#fruitId").text();
+        $.ajax({
+            url: "/Home/FindFruit",
+            type: "GET",
+            data: {
+                id: fruitId
+            },
+            datatype: "JSON",
+            success: function (result) {
+                //console.log(result);
+                //ViewModel = ko.mapping.fromJSON(result);
+                ko.applyBindings(new FruitView(result.id, result.name, result.price, result.description, result.image));
+            }
+        })
+    });
 
-    <script>
-        function ViewModel() {
-            var self = this;
-
-            //create a JS fruit object
+</script>
 
 
 
-        }
-    </script>
+

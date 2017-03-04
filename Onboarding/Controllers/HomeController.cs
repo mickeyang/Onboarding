@@ -46,5 +46,29 @@ namespace Onboarding.Controllers
             //    Image = fruitDetail.image
             //};
         }
+
+        public ActionResult FindFruit(int id)
+        {
+            var fruitDetail = db.Products.FirstOrDefault(p => p.id == id);
+            return Json(fruitDetail, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //Knockout pass JSON here, save data in database
+        [HttpPost]
+        public ActionResult AddFruit()
+        {
+            
+            Product newFruit = new Product {
+
+            };
+            db.Products.Add(newFruit);
+            db.SaveChanges();
+            return RedirectToAction("/Home/Index");
+        }
     }
 }
