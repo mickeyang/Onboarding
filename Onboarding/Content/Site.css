@@ -23,14 +23,23 @@ textarea {
     max-width: 280px;
 }
 
-.jumbotron{
-    background-color:#00ff90;
-    color:#ffffff;
-    font-size:50%;
+.jumbotron {
+    background-color:white;
+    color: #ff6a00;
+    font-size: 50%;
+    background-image: url('../Sources/ateed.jpg');
+    background-repeat:no-repeat;
+    background-size:auto;
+    height:340px;
+}
+
+h1{
+    font-family: 'Permanent Marker', cursive;
 }
 
 h2{
     text-transform:uppercase;
+    color:#0026ff;
 }
 
 dt,dd{
@@ -45,4 +54,13 @@ button{
 #note{
     color:red;
     padding-top:10px;
+}
+
+span{
+    margin-left:10px;
+}
+
+input{
+    border-radius:3px;
+    height:30px;
 }
