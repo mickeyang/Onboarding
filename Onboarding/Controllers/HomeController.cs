@@ -18,7 +18,7 @@ namespace Onboarding.Controllers
                 eachFruit.Id = d.id;
                 eachFruit.Name = d.name;
                 eachFruit.Description = d.description;
-                eachFruit.Price = (decimal)d.price;
+                eachFruit.Price = (double)d.price;
                 eachFruit.Image = d.image;
                 fruitList.Add(eachFruit);
             }
@@ -60,15 +60,17 @@ namespace Onboarding.Controllers
 
         //Knockout pass JSON here, save data in database
         [HttpPost]
-        public ActionResult AddFruit()
+        public ActionResult AddFruit(Product json)
         {
-            
             Product newFruit = new Product {
-
+                name = json.name,
+                description = json.description,
+                image = json.image,
+                price = json.price
             };
             db.Products.Add(newFruit);
             db.SaveChanges();
-            return RedirectToAction("/Home/Index");
+            return Json(new { success = true });
         }
     }
 }

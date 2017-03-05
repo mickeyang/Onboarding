@@ -26,7 +26,7 @@ function ViewModel() {
     self.Fruit = ko.observable();
     self.Fruits = ko.observableArray();
 
-    //get fruit detail and populate date to view
+    //get fruit detail and populate data to view
     $("#fruitId").ready(function () {
         var fruitId = $("#fruitId").text();
         $.ajax({
@@ -44,6 +44,24 @@ function ViewModel() {
             }
         })
     });  //end of detail
+
+    //add a fruit
+    self.addFruit = function () {
+        $.ajax({
+            url: "/Home/AddFruit",
+            type: "POST",
+            data: ko.toJSON(Fruit),
+            contentType: "application/json; charset=utf-8",
+            datatype: "JSON",
+            success: function (result) {
+                //console.log(result);
+                //ViewModel = ko.mapping.fromJSON(result);
+                if (result.success) {
+                    $("#note").html("Fruit added successfully");
+                } 
+            }
+        })
+    };
 
 
 }
