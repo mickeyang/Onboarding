@@ -16,34 +16,36 @@ function ViewModel() {
     self.image = ko.observable("");
 
     var Fruit = {
-        Id:self.id,
+        Id: self.id,
         Name: self.name,
         Description: self.description,
         Price: self.price,
-        Image:self.image
+        Image: self.image
     }
 
     self.Fruit = ko.observable();
     self.Fruits = ko.observableArray();
 
     //get fruit detail and populate data to view
-    $("#fruitId").ready(function () {
-        var fruitId = $("#fruitId").text();
-        $.ajax({
-            url: "/Home/FindFruit",
-            type: "GET",
-            data: {
-                id: fruitId
-            },
-            datatype: "JSON",
-            success: function (result) {
-                //console.log(result);
-                //ViewModel = ko.mapping.fromJSON(result);
-                self.Fruit(result);
-                //ko.applyBindings(new FruitView(result.id, result.name, result.price, result.description, result.image));
-            }
+    self.loadData = function () {
+        $("#fruitId").ready(function () {
+            var fruitId = $("#fruitId").text();
+            $.ajax({
+                url: "/Home/FindFruit",
+                type: "GET",
+                data: {
+                    id: fruitId
+                },
+                datatype: "JSON",
+                success: function (result) {
+                    //console.log(result);
+                    //ViewModel = ko.mapping.fromJSON(result);
+                    self.Fruit(result);
+                    //ko.applyBindings(new FruitView(result.id, result.name, result.price, result.description, result.image));
+                }
+            })
         })
-    });  //end of detail
+    };  //end of detail
 
     //add a fruit
     self.addFruit = function () {
@@ -58,10 +60,43 @@ function ViewModel() {
                 //ViewModel = ko.mapping.fromJSON(result);
                 if (result.success) {
                     $("#note").html("Fruit added successfully");
-                } 
+                }
             }
         })
     };
 
+    //edit fruit
+    self.editFruit = function () {
+        $.ajax({
+            url: "/Home/Edit",
+            type: "POST",
+            data: ko.toJSON(self.Fruit),
+            contentType: "application/json; charset=utf-8",
+            datatype: "JSON",
+            success: function (result) {
+                if (result.success) {
+                    $("#note").html("Fruit updated successfully");
+                }
+            }
+        })
+    };
+
+    //remove a fruit
+    self.deleteFruit = function () {
+        if (confirm("Do you want to delete this fruit?")) {
+            $.ajax({
+                url: "/Home/Delete",
+                type: "POST",
+                data: ko.toJSON(self.Fruit),
+                contentType: "application/json; charset=utf-8",
+                datatype: "JSON",
+                success: function (result) {
+                    if (result.success) {
+                        $("#note").html("Fruit deleted successfully");
+                    }
+                }
+            })
+        }
+    };
 
 }

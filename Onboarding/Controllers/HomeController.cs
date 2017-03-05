@@ -12,7 +12,7 @@ namespace Onboarding.Controllers
         {
             List<Fruit> fruitList = new List<Fruit>();
             var data = db.Products.Select(p => p).ToList();
-            foreach(var d in data)
+            foreach (var d in data)
             {
                 Fruit eachFruit = new Fruit();
                 eachFruit.Id = d.id;
@@ -62,13 +62,50 @@ namespace Onboarding.Controllers
         [HttpPost]
         public ActionResult AddFruit(Product json)
         {
-            Product newFruit = new Product {
+            Product newFruit = new Product
+            {
                 name = json.name,
                 description = json.description,
                 image = json.image,
                 price = json.price
             };
             db.Products.Add(newFruit);
+            db.SaveChanges();
+            return Json(new { success = true });
+        }
+
+        //edit fruit GET data from database,transfer to ViewModel
+        public ActionResult Edit(int id)
+        {
+            var editFruit = db.Products.FirstOrDefault(p => p.id == id);
+            Fruit fruit = new Fruit { Id = editFruit.id };
+            return View(fruit);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product json)
+        {
+            var editFruit = db.Products.FirstOrDefault(p => p.id == json.id);
+            editFruit.name = json.name;
+            editFruit.description = json.description;
+            editFruit.image = json.image;
+            editFruit.price = json.price;
+            db.SaveChanges();
+            return Json(new { success = true });
+        }
+         
+        public ActionResult Delete(int id)
+        {
+            var deleteFruit = db.Products.FirstOrDefault(p => p.id == id);
+            Fruit fruit = new Fruit { Id = deleteFruit.id};
+            return View(fruit);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Product json)
+        {
+            var deleteFruit = db.Products.FirstOrDefault(p => p.id == json.id);
+            db.Products.Remove(deleteFruit);
             db.SaveChanges();
             return Json(new { success = true });
         }

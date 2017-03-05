@@ -1,0 +1,36 @@
+﻿@model Onboarding.Models.Fruit
+@{
+    ViewBag.Title = "EditFruit";
+}
+<span id="fruitId">@Html.DisplayFor(m => m.Id)</span>
+<style>
+    #fruitId {
+        display: none;
+    }
+</style>
+
+<div data-bind="with:Fruit">
+    <h2>Edit Fruit</h2>
+    <hr />
+    <p><b>Product Code</b></p>
+    <p data-bind="text:id"></p>
+    <p><b>Product Name</b></p>
+    <input type="text" data-bind="value:name,valueUpdate:'afterkeydown'" required /> <span data-bind="text:name"></span>
+    <p><b>Description</b></p>
+    <input type="text" data-bind="value:description,valueUpdate:'afterkeydown'" required /> <span data-bind="text:description"></span>
+    <p><b>Price</b></p>
+    <input type="text" data-bind="value:price,valueUpdate:'afterkeydown'" required /> <span data-bind="text:price"></span>
+    <p><b>Image</b></p>
+    <input type="text" data-bind="value:image,valueUpdate:'afterkeydown'" required />
+    <br />
+    <button class="btn btn-lg btn-primary" data-bind="click:$root.editFruit">Update</button>
+</div>
+<div>
+    <span id="note"></span>
+</div>
+<script>
+    var model = new ViewModel();
+    model.loadData();
+    ko.applyBindings(model);
+</script>
+
