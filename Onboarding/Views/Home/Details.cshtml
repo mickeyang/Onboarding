@@ -2,13 +2,15 @@
 @{
     ViewBag.Title = "FruitDetail";
 }
-<h2 data-bind="text:name"></h2>
+<span id="fruitId">@Html.DisplayFor(m => m.Id)</span>
+<style>#fruitId{display:none;}</style>
 
-<div>
+<div data-bind="with:Fruit">
+    <h2 data-bind="text:name"></h2>
     <hr />
     <dl class="dl-horizontal">
         <dt>Code</dt>
-        <dd id="fruitId">@Html.DisplayFor(m => m.Id)</dd>
+        <dd data-bind="text:id"></dd>
         <dt>Description</dt>
         <dd data-bind="text:description"></dd>
         <dt>Price</dt>
@@ -23,23 +25,7 @@
 </p>
 
 <script>
-    $("#fruitId").ready(function () {
-        var fruitId = $("#fruitId").text();
-        $.ajax({
-            url: "/Home/FindFruit",
-            type: "GET",
-            data: {
-                id: fruitId
-            },
-            datatype: "JSON",
-            success: function (result) {
-                //console.log(result);
-                //ViewModel = ko.mapping.fromJSON(result);
-                ko.applyBindings(new FruitView(result.id, result.name, result.price, result.description, result.image));
-            }
-        })
-    });
-
+    ko.applyBindings(new ViewModel());
 </script>
 
 

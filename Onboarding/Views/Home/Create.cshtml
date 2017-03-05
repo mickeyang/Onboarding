@@ -4,21 +4,30 @@
 }
 
 <h2>Add New Fruit</h2>
-<hr/>
-<label>Product Name</label>
-<input data-bind="value:name" class="inp"/>
-<label>Description</label>
-<input />
-<label>Price</label>
-<input />
-<label>Image</label>
-<input />
+<hr />
+<p data-bind="text:name"><b>Product Name</b></p>
+<input type="text" data-bind="value:name,valueUpdate:'afterkeydown'" />
+<p><b>Description</b></p>
+<input type="text" data-bind="value:description,valueUpdate:'afterkeydown'" />
+<p><b>Price</b></p>
+<input type="text" data-bind="value:price" />
+<p><b>Image</b></p>
+<input type="text" data-bind="value:image" />
+<br />
+<input type="button" class="btn btn-default" value="Add" data-bind="click:addFruit" />
 
+<script>
+    function ViewModel() {
+        var self = this;
+        this.name = ko.observable("");
+        this.description = ko.observable("");
+        this.price = ko.observable("");
+        this.image = ko.observable("");
 
-<dt>Description</dt>
-<dd data-bind="text:description"></dd>
-<dt>Price</dt>
-<dd data-bind="text:price"></dd>
-<dt>Image</dt>
-<dd data-bind="text:image"></dd>
+        addFruit = function () {
+            alert(self.name);
+        }
+    }
+    ko.applyBindings(new ViewModel());
+</script>
 
