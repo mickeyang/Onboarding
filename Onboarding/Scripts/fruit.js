@@ -1,13 +1,4 @@
-﻿//function FruitView(id, name, price, description, image) {
-//    var self = this;
-//    self.id = ko.observable(id);
-//    self.name = ko.observable(name);
-//    self.description = ko.observable(description);
-//    self.price = ko.observable(price);
-//    self.image = ko.observable(image);
-//}
-
-function ViewModel() {
+﻿function ViewModel() {
     var self = this;
     self.id = ko.observable("");
     self.name = ko.observable("");
@@ -30,6 +21,7 @@ function ViewModel() {
     self.loadData = function () {
         $("#fruitId").ready(function () {
             var fruitId = $("#fruitId").text();
+            console.log(fruitId);
             $.ajax({
                 url: "/Home/FindFruit",
                 type: "GET",
@@ -38,10 +30,8 @@ function ViewModel() {
                 },
                 datatype: "JSON",
                 success: function (result) {
-                    //console.log(result);
                     //ViewModel = ko.mapping.fromJSON(result);
                     self.Fruit(result);
-                    //ko.applyBindings(new FruitView(result.id, result.name, result.price, result.description, result.image));
                 }
             })
         })
@@ -60,6 +50,7 @@ function ViewModel() {
                 //ViewModel = ko.mapping.fromJSON(result);
                 if (result.success) {
                     $("#note").html("Fruit added successfully");
+                    window.location.href = "/Home/Index";
                 }
             }
         })
@@ -76,6 +67,7 @@ function ViewModel() {
             success: function (result) {
                 if (result.success) {
                     $("#note").html("Fruit updated successfully");
+                    window.location.href("/Home/Index");
                 }
             }
         })

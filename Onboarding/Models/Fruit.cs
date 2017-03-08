@@ -11,7 +11,7 @@ namespace Onboarding.Models
         [Display(Name = "Description")]
         public string Description { get; set; }
         [Display(Name = "Price")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         [Display(Name = "Image")]
         public string Image { get; set; }
     }

@@ -39,7 +39,7 @@ h1{
 
 h2{
     text-transform:uppercase;
-    color:#0026ff;
+    color:tomato;
 }
 
 dt,dd{
@@ -47,8 +47,8 @@ dt,dd{
     padding-bottom:5px;
 }
 
-button{
-    margin-top:20px;
+.table > tbody > tr > td{
+    vertical-align:middle;
 }
 
 #note{

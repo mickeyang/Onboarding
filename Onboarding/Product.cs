@@ -14,10 +14,10 @@ namespace Onboarding
     
     public partial class Product
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public Nullable<double> price { get; set; }
-        public string image { get; set; }
-        public string description { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public string Image { get; set; }
+        public string Description { get; set; }
     }
 }

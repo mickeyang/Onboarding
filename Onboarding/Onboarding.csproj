@@ -250,13 +250,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Fruit.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Fruit.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Fruit.edmx.diagram">
-      <DependentUpon>Fruit.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -265,6 +258,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Fruit.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Fruit.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Fruit.edmx.diagram">
+      <DependentUpon>Fruit.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -351,7 +351,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>6502</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6502/</IISUrl>
+          <IISUrl>http://localhost:8142/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

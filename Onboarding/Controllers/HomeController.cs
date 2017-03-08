@@ -11,15 +11,15 @@ namespace Onboarding.Controllers
         public ActionResult Index()
         {
             List<Fruit> fruitList = new List<Fruit>();
-            var data = db.Products.Select(p => p).ToList();
+            var data = db.Product.Select(p => p).ToList();
             foreach (var d in data)
             {
                 Fruit eachFruit = new Fruit();
-                eachFruit.Id = d.id;
-                eachFruit.Name = d.name;
-                eachFruit.Description = d.description;
-                eachFruit.Price = (double)d.price;
-                eachFruit.Image = d.image;
+                eachFruit.Id = d.Id;
+                eachFruit.Name = d.Name;
+                eachFruit.Description = d.Description;
+                eachFruit.Price = (decimal)d.Price;
+                eachFruit.Image = d.Image;
                 fruitList.Add(eachFruit);
             }
             return View(fruitList);
@@ -27,29 +27,21 @@ namespace Onboarding.Controllers
 
         public ActionResult ListFruit()
         {
-            var data = db.Products.Select(p => p).ToList();
+            var data = db.Product.Select(p => p).ToList();
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Details(int id)
         {
             //get fruit from table by a given id
-            var fruitDetail = db.Products.FirstOrDefault(p => p.id == id);
-            Fruit fruit = new Fruit { Id = fruitDetail.id };
+            var fruitDetail = db.Product.FirstOrDefault(p => p.Id == id);
+            Fruit fruit = new Fruit { Id = fruitDetail.Id };
             return View(fruit);
-            //Fruit fruit = new Fruit
-            //{
-            //    Id = fruitDetail.id,
-            //    Name = fruitDetail.name,
-            //    Description = fruitDetail.description,
-            //    Price = (decimal)fruitDetail.price,
-            //    Image = fruitDetail.image
-            //};
         }
 
         public ActionResult FindFruit(int id)
         {
-            var fruitDetail = db.Products.FirstOrDefault(p => p.id == id);
+            var fruitDetail = db.Product.FirstOrDefault(p => p.Id == id);
             return Json(fruitDetail, JsonRequestBehavior.AllowGet);
         }
 
@@ -64,12 +56,12 @@ namespace Onboarding.Controllers
         {
             Product newFruit = new Product
             {
-                name = json.name,
-                description = json.description,
-                image = json.image,
-                price = json.price
+                Name = json.Name,
+                Description = json.Description,
+                Image = json.Image,
+                Price = json.Price
             };
-            db.Products.Add(newFruit);
+            db.Product.Add(newFruit);
             db.SaveChanges();
             return Json(new { success = true });
         }
@@ -77,35 +69,35 @@ namespace Onboarding.Controllers
         //edit fruit GET data from database,transfer to ViewModel
         public ActionResult Edit(int id)
         {
-            var editFruit = db.Products.FirstOrDefault(p => p.id == id);
-            Fruit fruit = new Fruit { Id = editFruit.id };
+            var editFruit = db.Product.FirstOrDefault(p => p.Id == id);
+            Fruit fruit = new Fruit { Id = editFruit.Id };
             return View(fruit);
         }
 
         [HttpPost]
         public ActionResult Edit(Product json)
         {
-            var editFruit = db.Products.FirstOrDefault(p => p.id == json.id);
-            editFruit.name = json.name;
-            editFruit.description = json.description;
-            editFruit.image = json.image;
-            editFruit.price = json.price;
+            var editFruit = db.Product.FirstOrDefault(p => p.Id == json.Id);
+            editFruit.Name = json.Name;
+            editFruit.Description = json.Description;
+            editFruit.Image = json.Image;
+            editFruit.Price = json.Price;
             db.SaveChanges();
             return Json(new { success = true });
         }
          
         public ActionResult Delete(int id)
         {
-            var deleteFruit = db.Products.FirstOrDefault(p => p.id == id);
-            Fruit fruit = new Fruit { Id = deleteFruit.id};
+            var deleteFruit = db.Product.FirstOrDefault(p => p.Id == id);
+            Fruit fruit = new Fruit { Id = deleteFruit.Id};
             return View(fruit);
         }
 
         [HttpPost]
         public ActionResult Delete(Product json)
         {
-            var deleteFruit = db.Products.FirstOrDefault(p => p.id == json.id);
-            db.Products.Remove(deleteFruit);
+            var deleteFruit = db.Product.FirstOrDefault(p => p.Id == json.Id);
+            db.Product.Remove(deleteFruit);
             db.SaveChanges();
             return Json(new { success = true });
         }
