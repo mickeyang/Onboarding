@@ -63,6 +63,7 @@ namespace Onboarding.Controllers
             };
             db.Product.Add(newFruit);
             db.SaveChanges();
+            db.Dispose();
             return Json(new { success = true });
         }
 
@@ -83,6 +84,7 @@ namespace Onboarding.Controllers
             editFruit.Image = json.Image;
             editFruit.Price = json.Price;
             db.SaveChanges();
+            db.Dispose();
             return Json(new { success = true });
         }
          
@@ -99,6 +101,7 @@ namespace Onboarding.Controllers
             var deleteFruit = db.Product.FirstOrDefault(p => p.Id == json.Id);
             db.Product.Remove(deleteFruit);
             db.SaveChanges();
+            db.Dispose();
             return Json(new { success = true });
         }
     }
