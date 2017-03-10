@@ -35,6 +35,10 @@ namespace Onboarding.Controllers
         {
             //get fruit from table by a given id
             var fruitDetail = db.Product.FirstOrDefault(p => p.Id == id);
+            if (fruitDetail == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Fruit fruit = new Fruit { Id = fruitDetail.Id };
             return View(fruit);
         }
@@ -42,6 +46,10 @@ namespace Onboarding.Controllers
         public ActionResult FindFruit(int id)
         {
             var fruitDetail = db.Product.FirstOrDefault(p => p.Id == id);
+            if (fruitDetail == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return Json(fruitDetail, JsonRequestBehavior.AllowGet);
         }
 
@@ -71,6 +79,10 @@ namespace Onboarding.Controllers
         public ActionResult Edit(int id)
         {
             var editFruit = db.Product.FirstOrDefault(p => p.Id == id);
+            if (editFruit == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Fruit fruit = new Fruit { Id = editFruit.Id };
             return View(fruit);
         }
@@ -79,6 +91,10 @@ namespace Onboarding.Controllers
         public ActionResult Edit(Product json)
         {
             var editFruit = db.Product.FirstOrDefault(p => p.Id == json.Id);
+            if (editFruit == null)
+            {
+                return RedirectToAction("Index", "Home");
+            } 
             editFruit.Name = json.Name;
             editFruit.Description = json.Description;
             editFruit.Image = json.Image;
@@ -91,6 +107,10 @@ namespace Onboarding.Controllers
         public ActionResult Delete(int id)
         {
             var deleteFruit = db.Product.FirstOrDefault(p => p.Id == id);
+            if (deleteFruit == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             Fruit fruit = new Fruit { Id = deleteFruit.Id};
             return View(fruit);
         }
@@ -99,6 +119,10 @@ namespace Onboarding.Controllers
         public ActionResult Delete(Product json)
         {
             var deleteFruit = db.Product.FirstOrDefault(p => p.Id == json.Id);
+            if (deleteFruit == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             db.Product.Remove(deleteFruit);
             db.SaveChanges();
             db.Dispose();

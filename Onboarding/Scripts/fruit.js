@@ -49,7 +49,7 @@
                 //console.log(result);
                 //ViewModel = ko.mapping.fromJSON(result);
                 if (result.success) {
-                    $("#note").html("Fruit added successfully");
+                    //$("#note").html("Fruit added successfully");
                     window.location.href = "/Home/Index";
                 }
             }
@@ -66,8 +66,8 @@
             datatype: "JSON",
             success: function (result) {
                 if (result.success) {
-                    $("#note").html("Fruit updated successfully");
-                    window.location.href("/Home/Index");
+                    //$("#note").html("Fruit updated successfully");
+                    window.location.href = "/Home/Index";
                 }
             }
         })
@@ -84,7 +84,8 @@
                 datatype: "JSON",
                 success: function (result) {
                     if (result.success) {
-                        $("#note").html("Fruit deleted successfully");
+                        //$("#note").html("Fruit deleted successfully");
+                        window.location.href = "/Home/Index";
                     }
                 }
             })
